@@ -5,6 +5,10 @@ description = "Computer system architecture Lab #3 -- Experiment (stack machine)
 authors = ["Max Barsukov <maximbarsukov@bk.ru>"]
 license = "GPL-3.0"
 readme = "README.md"
+packages = [{include = "*.py", from="src"}]
+
+[tool.poetry.scripts]
+main = "src.main:start"
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -82,6 +86,7 @@ ignore = [
     "COM812", # The following rules may cause conflicts when used with the formatter: `COM812`.
     "E501",   # allow lines longer than 80 symbols (up to 120)
     "T201",   # `print` found
+    "PD011",  # Breaks .values
     "RUF002", # Docstring contains ambiguous `В` (CYRILLIC CAPITAL LETTER VE). Did you mean `B` (LATIN CAPITAL LETTER B)
     "RUF003", # Comment contains ambiguous `с` (CYRILLIC SMALL LETTER ES). Did you mean `c` (LATIN SMALL LETTER C)
     "PTH123", # `open()` should be replaced by `Path.open()`
