@@ -124,5 +124,8 @@ cython_debug/
 .idea/
 .vscode/
 
+# Draw.io schemas
+*.drawio
+
 # Misc
 *.DS_Store
