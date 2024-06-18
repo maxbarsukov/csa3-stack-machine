@@ -1,5 +1,5 @@
-from src.isa.memory import InstructionMemory, DataMemory
-from src.isa.json_utils import instructions_to_json, data_to_json, json_to_instructions, json_to_data
+from src.isa.json_utils import data_to_json, instructions_to_json, json_to_data, json_to_instructions
+from src.isa.memory import DataMemory, InstructionMemory
 
 
 def write_instructions(instructions_filename: str, instructions: InstructionMemory) -> None:

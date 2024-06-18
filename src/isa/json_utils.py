@@ -1,8 +1,8 @@
 import json
 
-from src.isa.memory import InstructionMemory, DataMemory, create_instructions_memory, create_data_memory
-from src.isa.instruction import Instruction
 from src.isa.data import Data
+from src.isa.instruction import Instruction
+from src.isa.memory import DataMemory, InstructionMemory, create_data_memory, create_instructions_memory
 from src.isa.opcode import Opcode
 
 

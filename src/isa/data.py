@@ -1,5 +1,6 @@
 import json
-from src.constants import MAX_NUMBER, MIN_NUMBER, MEMORY_SIZE
+
+from src.constants import MAX_NUMBER, MEMORY_SIZE, MIN_NUMBER
 
 
 class Data:

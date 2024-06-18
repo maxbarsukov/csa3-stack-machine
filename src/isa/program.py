@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 from src.isa.data import Data
 from src.isa.instruction import Instruction
-from src.isa.memory import InstructionMemory, DataMemory
+from src.isa.memory import DataMemory, InstructionMemory
 
 
 # TODO remove later if useless

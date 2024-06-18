@@ -1,15 +1,13 @@
 from src.isa import (
-    Instruction,
     Data,
-    InstructionMemory,
-    DataMemory,
+    Instruction,
     Opcode,
-    write_data,
-    write_instructions,
-    read_data,
-    read_instructions,
     create_data_memory,
     create_instructions_memory,
+    read_data,
+    read_instructions,
+    write_data,
+    write_instructions,
 )
 
 
