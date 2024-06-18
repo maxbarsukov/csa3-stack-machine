@@ -5,6 +5,7 @@ from src.isa.instruction import Instruction
 from src.isa.data import Data
 from src.isa.opcode import Opcode
 
+
 def instructions_to_json(instructions: InstructionMemory) -> str:
     """Перевести инструкции в JSON."""
     instructions.insert_null_cells()
@@ -19,7 +20,9 @@ def data_to_json(data: DataMemory) -> str:
 
 def json_to_instructions(instructions_json: str) -> InstructionMemory:
     """Перевести JSON в инструкции."""
-    return create_instructions_memory([Instruction(i["address"], Opcode(i["opcode"]), i["operand"]) for i in json.loads(instructions_json)])
+    return create_instructions_memory(
+        [Instruction(i["address"], Opcode(i["opcode"]), i["operand"]) for i in json.loads(instructions_json)]
+    )
 
 
 def json_to_data(data_json: str) -> DataMemory:

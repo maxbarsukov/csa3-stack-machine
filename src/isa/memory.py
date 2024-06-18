@@ -17,10 +17,11 @@ class Memory(Generic[CellType]):
 
         seen = set()
         unique_address_list = [seen.add(obj.address) or obj for obj in values if obj.address not in seen]
-        assert len(unique_address_list) == len(values), f"Addresses must be unique! ({len(unique_address_list)} - unique, {len(values)} - all)"
+        assert len(unique_address_list) == len(
+            values
+        ), f"Addresses must be unique! ({len(unique_address_list)} - unique, {len(values)} - all)"
 
         self.values = sorted(values, key=lambda v: v.address)
-
 
     def insert_null_cells(self) -> None:
         max_address = max(self.values, key=lambda item: item.address).address
@@ -32,7 +33,6 @@ class Memory(Generic[CellType]):
 
         self.values = sorted(vs, key=lambda v: v.address)
 
-
     def __str__(self) -> str:
         return "[\n  " + "\n  ".join(str(value) for value in self.values) + "\n]"
 
@@ -40,10 +40,12 @@ class Memory(Generic[CellType]):
 DataMemory = Memory[Data]
 InstructionMemory = Memory[Instruction]
 
+
 def create_data_memory(values: list[Data]) -> DataMemory:
     memory = DataMemory(values, True)
     memory.insert_null_cells()
     return memory
+
 
 def create_instructions_memory(values: list[Instruction]) -> InstructionMemory:
     memory = InstructionMemory(values, True)

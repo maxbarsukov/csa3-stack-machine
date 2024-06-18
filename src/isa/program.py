@@ -2,6 +2,7 @@ from src.isa.data import Data
 from src.isa.instruction import Instruction
 from src.isa.memory import InstructionMemory, DataMemory
 
+
 # TODO remove later if useless
 class Program:
     def __init__(self, instructions: InstructionMemory, data: DataMemory) -> None:

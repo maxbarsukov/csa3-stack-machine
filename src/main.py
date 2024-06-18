@@ -1,4 +1,17 @@
-from src.isa import Instruction, Data, InstructionMemory, DataMemory, Opcode, write_data, write_instructions, read_data, read_instructions, create_data_memory, create_instructions_memory
+from src.isa import (
+    Instruction,
+    Data,
+    InstructionMemory,
+    DataMemory,
+    Opcode,
+    write_data,
+    write_instructions,
+    read_data,
+    read_instructions,
+    create_data_memory,
+    create_instructions_memory,
+)
+
 
 def start() -> None:
     instr = create_instructions_memory(

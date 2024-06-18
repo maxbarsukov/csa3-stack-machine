@@ -17,12 +17,9 @@ class Instruction:
         self.operand = operand
 
     def __str__(self) -> str:
-        return f"{(str(self.address) + ":"):<6} {self.opcode.name:<6} " + (f"{self.operand}" if self.operand is not None else "")
+        return f"{(str(self.address) + ":"):<6} {self.opcode.name:<6} " + (
+            f"{self.operand}" if self.operand is not None else ""
+        )
 
     def to_json(self) -> str:
-        return json.dumps(
-            self,
-            default=vars,
-            sort_keys=True,
-            indent=2
-        )
+        return json.dumps(self, default=vars, sort_keys=True, indent=2)
