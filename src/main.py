@@ -1,16 +1,22 @@
-from src.isa.instruction import Instruction
-from src.isa.memory import InstructionMemory
-from src.isa.opcode import Opcode
-from src.isa.program import Program
+from src.isa import Instruction, Data, InstructionMemory, DataMemory, Opcode, Program, write_code, read_code
 
-
-def start():
+def start() -> None:
     instr = InstructionMemory(
         [
-            Instruction(Opcode.PUSH),
-            Instruction(Opcode.PUSH),
-            Instruction(Opcode.ADD, 2),
-            Instruction(Opcode.NOP, 1),
+            Instruction(10, Opcode.PUSH),
+            Instruction(0, Opcode.PUSH),
+            Instruction(1, Opcode.ADD, 2),
+            Instruction(2, Opcode.NOP, 1),
         ]
     )
-    print(Program(instr, 1))
+    data = DataMemory(
+        [
+            Data(10, 2),
+            Data(0, 10),
+            Data(1, 1),
+            Data(6, 1),
+            Data(2, 0),
+        ]
+    )
+    write_code("i.txt", "d.txt", Program(instr, data))
+    print(read_code("i.txt", "d.txt"))
