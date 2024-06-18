@@ -25,24 +25,22 @@ class Opcode(StrEnum):
     JMP = "jmp"
     JZ = "jz"
     JNZ = "jnz"
+    JS = "js"
+    JNS = "jns"
 
     CALL = "call"
     RET = "ret"
 
-    IN = "IN"
-    OUT = "OUT"
+    INOUT = "INPUT"
+    OUTPUT = "OUTPUT"
 
     PUSH = "push"
     POP = "pop"
-    LOAD = "load"
-    DROP = "drop"
-    DUP = "dup"
-    SWAP = "swap"
-    OVER = "over"
 
-    NUM = "num"
-    STR = "str"
-    BUF = "buf"
+    LOAD = "load"
+    STORE = "store"
+    SWAP = "swap"
+    DUP = "DUP"
 
     HALT = "halt"
 
