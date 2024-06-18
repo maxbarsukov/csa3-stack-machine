@@ -1,22 +1,28 @@
-from src.isa.memory import InstructionMemory
+from src.isa.data import Data
+from src.isa.instruction import Instruction
+from src.isa.memory import InstructionMemory, DataMemory
 
 
 class Program:
-    def __init__(self, instructions: InstructionMemory, init: int) -> None:
-        self.instructions = instructions
-        self.init = init
+    def __init__(self, instructions: InstructionMemory, data: DataMemory) -> None:
+        self._instructions = instructions
+        self._data = data
 
     def __eq__(self, other):
         if isinstance(other, Program):
-            return self.instructions.values == other.instructions.values and self.init == other.init
+            return self.instructions() == other.instructions() and self.data() == other.data()
         return False
 
-    def __str__(self) -> str:
-        result = ""
-        for i, instr in enumerate(self.instructions.values):
-            if i == self.init:
-                result += f"{("> " + str(i)+"."):<8} {instr}\n"
-            else:
-                result += f"{("  " + str(i)+"."):<8} {instr}\n"
+    def instructions(self) -> list[Instruction]:
+        return self._instructions.values
 
-        return result
+    def data(self) -> list[Data]:
+        return self._data.values
+
+    def __str__(self) -> str:
+        result = "DATA:\n" + str(self._data) + "\n\nINSTRUCTIONS:\n[\n"
+
+        for instr in self.instructions():
+            result += f"{("> " if instr.address == 0 else "  ") + str(instr)}\n"
+
+        return result + "]\n"

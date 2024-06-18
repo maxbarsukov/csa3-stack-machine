@@ -13,7 +13,6 @@ class Opcode(StrEnum):
     DIV = "div"
     MOD = "mod"
     NEG = "neg"
-
     INC = "inc"
     DEC = "dec"
 
@@ -33,14 +32,17 @@ class Opcode(StrEnum):
     IN = "IN"
     OUT = "OUT"
 
-    LIT = "lit"
-
     PUSH = "push"
     POP = "pop"
+    LOAD = "load"
     DROP = "drop"
     DUP = "dup"
     SWAP = "swap"
     OVER = "over"
+
+    NUM = "num"
+    STR = "str"
+    BUF = "buf"
 
     HALT = "halt"
 

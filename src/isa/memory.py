@@ -12,10 +12,10 @@ MemoryType = TypeVar("MemoryType")
 class Memory(Generic[MemoryType]):
     def __init__(self, values: list[MemoryType]) -> None:
         assert 1 <= len(values) <= MEMORY_SIZE, f"Out of memory for {type(values[0]).__name__}"
-        self.values = values
+        self.values = sorted(values, key=lambda v: v.address)
 
     def __str__(self) -> str:
-        return "[\n  " + ",\n  ".join(str(value) for value in self.values) + "\n]"
+        return "[\n  " + ";\n  ".join(str(value) for value in self.values) + "\n]"
 
 
 DataMemory = Memory[Data]
