@@ -85,7 +85,9 @@ def translate_operands(labels: dict[str, int], code: list[Instruction], labels2d
         if instruction.operand:
             if instruction.opcode in {Opcode.INPUT, Opcode.OUTPUT}:
                 instruction.operand = int(instruction.operand)
-                assert 0 <= instruction.operand <= IO_PORTS - 1, f"Number of port must take values in [0; {IO_PORTS - 1}]"
+                assert (
+                    0 <= instruction.operand <= IO_PORTS - 1
+                ), f"Number of port must take values in [0; {IO_PORTS - 1}]"
                 continue
             if instruction.opcode is Opcode.PUSH:
                 if not is_number(instruction.operand):
