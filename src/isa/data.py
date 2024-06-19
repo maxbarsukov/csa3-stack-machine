@@ -4,6 +4,8 @@ from src.constants import MAX_NUMBER, MEMORY_SIZE, MIN_NUMBER
 
 
 class Data:
+    NAME = "DATA"
+
     @staticmethod
     def empty(address: int):
         return Data(address, 0)

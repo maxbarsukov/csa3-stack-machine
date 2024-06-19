@@ -34,7 +34,9 @@ class Memory(Generic[CellType]):
         self.values = sorted(vs, key=lambda v: v.address)
 
     def __str__(self) -> str:
-        return "[\n  " + "\n  ".join(str(value) for value in self.values) + "\n]"
+        return (
+            f"{self.__orig_class__.__args__[0].NAME}: [\n  " + "\n  ".join(str(value) for value in self.values) + "\n]"
+        )
 
 
 DataMemory = Memory[Data]
