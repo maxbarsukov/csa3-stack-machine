@@ -27,4 +27,4 @@ class Instruction:
         )
 
     def to_json(self) -> str:
-        return json.dumps(self, default=vars, sort_keys=True, indent=2)
+        return json.dumps(self, default=vars, sort_keys=True)

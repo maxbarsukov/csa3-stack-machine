@@ -19,6 +19,7 @@ class Opcode(StrEnum):
     AND = "and"
     OR = "or"
     NOT = "not"
+    XOR = "xor"
 
     CMP = "cmp"
 
