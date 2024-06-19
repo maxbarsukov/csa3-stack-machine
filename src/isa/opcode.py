@@ -6,22 +6,24 @@ from enum import StrEnum, unique
 @unique
 class Opcode(StrEnum):
     NOP = "nop"
+    HALT = "halt"
 
+    # Binary operators
     ADD = "add"
     SUB = "sub"
     MUL = "mul"
     DIV = "div"
     MOD = "mod"
-    NEG = "neg"
-    INC = "inc"
-    DEC = "dec"
-
+    CMP = "cmp"
     AND = "and"
     OR = "or"
-    NOT = "not"
     XOR = "xor"
 
-    CMP = "cmp"
+    # Unary operators
+    INC = "inc"
+    DEC = "dec"
+    NEG = "neg"
+    NOT = "not"
 
     JMP = "jmp"
     JZ = "jz"
@@ -42,8 +44,6 @@ class Opcode(StrEnum):
     STORE = "store"
     SWAP = "swap"
     DUP = "dup"
-
-    HALT = "halt"
 
     def __init__(self, mnemonic: str):
         self.mnemonic = mnemonic
