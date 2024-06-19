@@ -9,6 +9,7 @@ packages = [{include = "*.py", from="src"}]
 
 [tool.poetry.scripts]
 main = "src.main:start"
+translator = "src.translator.main:start"
 
 [tool.poetry.dependencies]
 python = "^3.12"
