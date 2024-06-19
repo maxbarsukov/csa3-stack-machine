@@ -6,7 +6,7 @@ import tempfile
 
 import pytest
 import src.machine.main as machine
-import src.translator as translator
+import src.translator.main as translator
 
 
 @pytest.mark.golden_test("golden/*.yml")
@@ -25,15 +25,15 @@ def test_translator_and_machine(golden, caplog):
             f.write(golden["in_stdin"])
 
         with contextlib.redirect_stdout(io.StringIO()) as stdout:
-            translator.main(source, target_data, target_code)
+            translator.main(source, target_code, target_data)
             print("============================================================")
-            machine(target_code, target_data, input_stream)
+            machine.main(target_code, target_data, input_stream)
 
-        with open(target_code, mode="rb") as f:
-            code = str(f.read(), encoding="utf-8")
+        with open(target_code, encoding="utf-8") as f:
+            code = f.read()
 
-        with open(target_data, mode="rb") as f:
-            data = str(f.read(), encoding="utf-8")
+        with open(target_data, encoding="utf-8") as f:
+            data = f.read()
 
         assert data == golden.out["out_data"]
         assert code == golden.out["out_code"]
