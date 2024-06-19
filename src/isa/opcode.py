@@ -31,8 +31,8 @@ class Opcode(StrEnum):
     CALL = "call"
     RET = "ret"
 
-    INOUT = "INPUT"
-    OUTPUT = "OUTPUT"
+    INPUT = "input"
+    OUTPUT = "output"
 
     PUSH = "push"
     POP = "pop"
@@ -40,7 +40,7 @@ class Opcode(StrEnum):
     LOAD = "load"
     STORE = "store"
     SWAP = "swap"
-    DUP = "DUP"
+    DUP = "dup"
 
     HALT = "halt"
 
