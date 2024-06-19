@@ -43,7 +43,7 @@ def main(source_file: str, target_instructions_file: str, target_data_file: str)
 
     source_loc = len([line for line in source.split("\n") if line.strip()])
     instructions_loc = len(instructions.values)
-    print(".asm Source LoC:", source_loc, "Instructions LoC:", instructions_loc)
+    print("source LoC:", source_loc, "code instr:", instructions_loc)
 
 
 def start():
