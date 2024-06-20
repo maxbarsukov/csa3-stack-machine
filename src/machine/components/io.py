@@ -61,6 +61,7 @@ class IO0(IO):
 # OUTPUT 1
 class IO1(IO):
     """Выводит переданное слово как символ."""
+
     def __init__(self, _data_in: list):
         self.data_out = []
 
@@ -73,9 +74,11 @@ class IO1(IO):
     def get_received_data(self) -> list:
         return self.data_out
 
+
 # OUTPUT 2
 class IO2(IO):
     """Выводит переданное слово как число."""
+
     def __init__(self, _data_in: list):
         self.data_out = []
 
@@ -87,6 +90,7 @@ class IO2(IO):
 
     def get_received_data(self) -> list:
         return self.data_out
+
 
 # INPUT 8
 class IO8(IO):

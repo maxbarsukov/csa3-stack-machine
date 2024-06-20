@@ -12,24 +12,8 @@ from src.machine.control_unit import ControlUnit
 from src.machine.data_path import DataPath
 
 
-def simulation(
-    instructions: InstructionMemory,
-    data: DataMemory,
-    input_tokens: list[str],
-    stack_capacity: int,
-    call_stack_capacity: int,
-    instruction_limit: int,
-    output_from_ports: list[int],
-) -> tuple[str, int, int]:
-    io_controller = IOController()
-    for port, create_io in get_ios():
-        io_controller.add_io(create_io(input_tokens), port)
-
-    data_path = DataPath(DataStack(stack_capacity), Memory(data, MEMORY_SIZE), io_controller)
-    control_unit = ControlUnit(instructions, CallStack(call_stack_capacity), data_path)
-
+def run(control_unit: ControlUnit, instruction_limit: int) -> tuple[int, ControlUnit]:
     instr_counter = 0
-
     logging.debug("%s", control_unit)
     try:
         while instr_counter < instruction_limit:
@@ -46,8 +30,28 @@ def simulation(
     if instr_counter >= instruction_limit:
         logging.warning(f"Instruction limit {instruction_limit} reached!")
 
-    logging.debug("memory: %s", data_path.memory.memory)
+    return instr_counter, control_unit
 
+
+def simulation(
+    instructions: InstructionMemory,
+    data: DataMemory,
+    input_tokens: list[str],
+    stack_capacity: int,
+    call_stack_capacity: int,
+    instruction_limit: int,
+    output_from_ports: list[int],
+) -> tuple[str, int, int]:
+    io_controller = IOController()
+    for port, create_io in get_ios():
+        io_controller.add_io(create_io(input_tokens), port)
+
+    data_path = DataPath(DataStack(stack_capacity), Memory(data, MEMORY_SIZE), io_controller)
+    control_unit = ControlUnit(instructions, CallStack(call_stack_capacity), data_path)
+
+    instr_counter, control_unit = run(control_unit, instruction_limit)
+
+    logging.debug("memory: %s", data_path.memory.memory)
     for port in output_from_ports:
         output_buffer = data_path.io_controller.get_io(port).get_received_data()
         logging.info("output_buffer (port %s): %s", str(port), repr("".join(output_buffer)))
