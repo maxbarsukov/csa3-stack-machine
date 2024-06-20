@@ -45,6 +45,8 @@ class Opcode(StrEnum):
     SWAP = "swap"
     DUP = "dup"
 
+    DEBUG = "debug"
+
     def __init__(self, mnemonic: str):
         self.mnemonic = mnemonic
 
