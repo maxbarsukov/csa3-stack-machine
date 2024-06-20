@@ -1,8 +1,19 @@
 from __future__ import annotations
 
+import logging
+
 from src.isa import Instruction, InstructionMemory, Opcode
 from src.machine.components.call_stack import CallStack
+from src.machine.components.io import log_io
 from src.machine.data_path import DataPath
+
+STACK_OPS = {
+    Opcode.POP: lambda stack: stack.pop(),
+    Opcode.DUP: lambda stack: stack.dup(),
+    Opcode.OVER: lambda stack: stack.over(),
+    Opcode.OVER3: lambda stack: stack.over3(),
+    Opcode.SWAP: lambda stack: stack.swap(),
+}
 
 
 class ControlUnit:
@@ -94,13 +105,42 @@ class ControlUnit:
 
     def decode_and_execute_instruction(self):
         instr = self.program.values[self.pc]
+        opcode = instr.opcode
 
         if self.decode_and_execute_control_flow_instruction(instr):
             return
 
-        self.data_path.latch_tos(instr)
-        self.signal_latch_pc()
-        self.tick()
+        if opcode == Opcode.DEBUG:
+            logging.debug("DEBUG: %s", repr(self.data_path))
+            logging.debug("DEBUG: %s", self.data_path.memory.memory.values)
+            # Breakpoint
+            input()
+
+        if opcode in {Opcode.LOAD, Opcode.STORE}:
+            self.data_path.latch_data_addr()
+            self.tick()
+
+        if opcode == Opcode.STORE:
+            self.data_path.memory.signal_write(self.data_path.stack.pretop(), self.data_path.stack.top())
+            self.signal_latch_pc()
+            self.tick()
+
+        elif opcode == Opcode.OUTPUT:
+            symbol = self.data_path.stack.top()
+            self.data_path.io_controller.signal_write(symbol, instr.operand)
+            log_io(symbol, "OUTPUT")
+            self.signal_latch_pc()
+            self.tick()
+
+        elif opcode in STACK_OPS.keys():
+            STACK_OPS[opcode](self.data_path.stack)
+            self.signal_latch_pc()
+            self.tick()
+
+        else:
+            self.data_path.latch_tos(instr)
+            self.signal_latch_pc()
+            self.tick()
 
     def __repr__(self):
         if self.data_path.data_addr < len(self.data_path.memory.memory.values):

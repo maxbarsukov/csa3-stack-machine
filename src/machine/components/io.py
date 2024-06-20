@@ -116,3 +116,17 @@ def get_ios() -> list[tuple[int, Callable[[list[str]], int]]]:
         (2, lambda _inp: IO2(None)),
         (8, lambda _inp: IO8(None)),
     }
+
+
+def log_io(symbol: int, name: str):
+    if symbol == 0:
+        logging.debug("%s: \\0", name)
+    elif symbol == -1:
+        logging.debug("%s: EOF", name)
+    elif symbol == 10:
+        logging.debug("%s: \\n", name)
+    else:
+        try:
+            logging.debug("%s: %s", name, chr(symbol))
+        except ValueError:
+            logging.debug("%s: %s", name, str(symbol))
