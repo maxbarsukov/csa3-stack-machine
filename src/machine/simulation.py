@@ -51,9 +51,11 @@ def simulation(
 
     instr_counter, control_unit = run(control_unit, instruction_limit)
 
+    output_buffer = []
     logging.debug("memory: %s", data_path.memory.memory)
     for port in output_from_ports:
-        output_buffer = data_path.io_controller.get_io(port).get_received_data()
-        logging.info("output_buffer (port %s): %s", str(port), repr("".join(output_buffer)))
+        out = data_path.io_controller.get_io(port).get_received_data()
+        output_buffer.append("".join(out))
+        logging.info("output_buffer (port %s): %s", str(port), repr("".join(out)))
 
-    return "".join(output_buffer), instr_counter, control_unit.current_tick()
+    return "\n".join(output_buffer), instr_counter, control_unit.current_tick()
