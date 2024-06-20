@@ -39,11 +39,13 @@ class Opcode(StrEnum):
 
     PUSH = "push"
     POP = "pop"
+    SWAP = "swap"
+    DUP = "dup"
+    OVER = "over"
+    OVER3 = "over3"
 
     LOAD = "load"
     STORE = "store"
-    SWAP = "swap"
-    DUP = "dup"
 
     DEBUG = "debug"
 
