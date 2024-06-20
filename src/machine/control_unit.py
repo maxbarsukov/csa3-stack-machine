@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from src.isa import Instruction, InstructionMemory, Opcode
 from src.machine.components.call_stack import CallStack
-from src.machine.components.data_path import DataPath
+from src.machine.data_path import DataPath
 
 
 class ControlUnit:

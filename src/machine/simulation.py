@@ -5,11 +5,12 @@ import logging
 from src.constants import MEMORY_SIZE
 from src.isa import DataMemory, InstructionMemory
 from src.machine.components.call_stack import CallStack
-from src.machine.components.control_unit import ControlUnit
-from src.machine.components.data_path import DataPath
 from src.machine.components.data_stack import DataStack
-from src.machine.components.io import IO0, IO1, IOController
+from src.machine.components.io import IO0, IO1, IOController, get_ios
 from src.machine.components.memory import Memory
+
+from src.machine.data_path import DataPath
+from src.machine.control_unit import ControlUnit
 
 
 def simulation(
@@ -21,11 +22,8 @@ def simulation(
     instruction_limit: int,
 ) -> tuple[str, int, int]:
     io_controller = IOController()
-
-    io_0_input = IO0(input_tokens)
-    io_controller.add_io(io_0_input, 0)
-    io_1_output = IO1(input_tokens)
-    io_controller.add_io(io_1_output, 1)
+    for port, create_io in get_ios():
+        io_controller.add_io(create_io(input_tokens), port)
 
     data_path = DataPath(DataStack(stack_capacity), Memory(data, MEMORY_SIZE), io_controller)
     control_unit = ControlUnit(instructions, CallStack(call_stack_capacity), data_path)
@@ -40,6 +38,8 @@ def simulation(
             logging.debug("%s", control_unit)
     except EOFError:
         logging.warning("Input buffer is empty!")
+    except KeyboardInterrupt:
+        pass
     except StopIteration:
         pass
 

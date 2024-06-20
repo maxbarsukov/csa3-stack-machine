@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+import logging
+from typing import Callable
 
 
 class IO(ABC):
@@ -32,6 +34,7 @@ class IOController:
         try:
             return self.io_list.get(port).signal_in()
         except EOFError:
+            logging.warning("Input buffer is empty at IO %s!", port)
             return -1
 
     def signal_write(self, data: int, port: int) -> None:
@@ -68,3 +71,27 @@ class IO1(IO):
 
     def get_received_data(self) -> list:
         return self.data_out
+
+# INPUT 8
+class IO8(IO):
+    """Отдает числа от 0 до 9."""
+
+    def __init__(self, _data_in: list):
+        self.data_in = None
+        self.counter = 0
+
+    def signal_in(self) -> int:
+        self.counter += 1
+        self.counter %= 10
+        return ord(str(self.counter))
+
+    def signal_out(self, _data: int):
+        raise NotImplementedError()
+
+
+def get_ios() -> list[tuple[int, Callable[[list[str]], int]]]:
+    return {
+        (0, lambda inp: IO0(inp)),
+        (1, lambda _inp: IO1(None)),
+        (8, lambda _inp: IO8(None)),
+    }
