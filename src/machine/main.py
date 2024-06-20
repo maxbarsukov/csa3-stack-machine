@@ -8,7 +8,9 @@ from src.isa import read_data, read_instructions
 from src.machine.simulation import simulation
 
 
-def main(instructions_file: str, data_file: str, input_file: str, output_from_ports: list[int]) -> None:
+def main(instructions_file: str, data_file: str, input_file: str, output_from_ports: list[int], log_level: int) -> None:
+    logging.getLogger().setLevel(log_level)
+
     instructions = read_instructions(instructions_file)
     data = read_data(data_file)
 
@@ -71,8 +73,7 @@ def start() -> None:
     else:
         ports = [1, 2]
 
-    logging.getLogger().setLevel(level)
-    main(args.instructions_file, args.data_file, args.input_file, ports)
+    main(args.instructions_file, args.data_file, args.input_file, ports, level)
 
 
 if __name__ == "__main__":

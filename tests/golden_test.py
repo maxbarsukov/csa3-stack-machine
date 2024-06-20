@@ -27,7 +27,7 @@ def test_translator_and_machine(golden, caplog):
         with contextlib.redirect_stdout(io.StringIO()) as stdout:
             translator.main(source, target_code, target_data)
             print("============================================================")
-            machine.main(target_code, target_data, input_stream)
+            machine.main(target_code, target_data, input_stream, [1, 2], logging.DEBUG)
 
         with open(target_code, encoding="utf-8") as f:
             code = f.read()
