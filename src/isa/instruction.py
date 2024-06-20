@@ -14,7 +14,7 @@ class Instruction:
         return Instruction(address, Opcode.NOP)
 
     def __init__(self, address: int, opcode: Opcode, operand: int | str | None = None) -> None:
-        assert 0 <= address <= MEMORY_SIZE, f"Instruction '{opcode}'at {address} is out of memory"
+        assert 0 <= address < MEMORY_SIZE, f"Instruction '{opcode}'at {address} is out of memory"
         self.address = address
         self.opcode = opcode
         self.operand = operand

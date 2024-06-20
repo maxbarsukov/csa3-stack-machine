@@ -12,7 +12,7 @@ class Data:
 
     def __init__(self, address: int, value: int) -> None:
         assert MIN_NUMBER <= value <= MAX_NUMBER, f"Data value '{value}' at {address} is out of bound."
-        assert 0 <= address <= MEMORY_SIZE, f"Data value '{value}' is out of memory at {address}."
+        assert 0 <= address < MEMORY_SIZE, f"Data value '{value}' is out of memory at {address}."
         self.address = address
         self.value = value
 
