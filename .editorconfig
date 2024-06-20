@@ -17,8 +17,11 @@ indent_size = 4
 [*.{json,yml,yaml}]
 indent_size = 2
 
-[*.md]
+[*.{md,txt}]
 trim_trailing_whitespace = false
+
+[*.txt]
+insert_final_newline = false
 
 [{Makefile,**.mk}]
 indent_style = tab
