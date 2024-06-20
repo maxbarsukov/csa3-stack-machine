@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
 import logging
+from abc import ABC, abstractmethod
 from typing import Callable
 
 
@@ -71,6 +71,7 @@ class IO1(IO):
 
     def get_received_data(self) -> list:
         return self.data_out
+
 
 # INPUT 8
 class IO8(IO):
