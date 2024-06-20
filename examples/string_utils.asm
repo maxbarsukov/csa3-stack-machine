@@ -106,4 +106,13 @@ add_new_line:
 
 
 _start:
+    push buf
+    call read_string
+
+    push 33
+    push buf
+    call push_char
+
+    push buf
+    call print_string
     halt
