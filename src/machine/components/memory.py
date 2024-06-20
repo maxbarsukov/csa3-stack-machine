@@ -17,8 +17,8 @@ class Memory:
 
         if addr < len(self.memory.values):
             return self.memory.values[addr]
-        else:
-            return 0
+
+        return 0
 
     def signal_write(self, addr: int, data: int) -> None:
         assert 0 <= addr < self.memory_size, f"Writing to not existing address: {addr}"
@@ -26,5 +26,5 @@ class Memory:
         if addr < len(self.memory.values):
             self.memory.values[addr] = Data(addr, data)
         else:
-            l = self.memory.values + [(Data(addr, data))]
-            self.memory = create_data_memory(l)
+            new_memory = [*self.memory.values, Data(addr, data)]
+            self.memory = create_data_memory(new_memory)
