@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import sys
+import argparse
 
 from src.isa import (
     Data,
@@ -47,11 +47,14 @@ def main(source_file: str, target_instructions_file: str, target_data_file: str)
 
 
 def start():
-    assert (
-        len(sys.argv) == 4
-    ), "Wrong arguments: translator.py <input_file> <target_instructions_file> <target_data_file>"
-    _, source_file, target_instructions_file, target_data_file = sys.argv
-    main(source_file, target_instructions_file, target_data_file)
+    parser = argparse.ArgumentParser(description='CSA Lab 3 translator.')
+    parser.add_argument('source_file', type=str, help='File with asm code')
+    parser.add_argument('target_instrs_file', type=str, help='File to write instructions after compilation')
+    parser.add_argument('target_data_file', type=str, help='File to write data after compilation')
+
+    args = parser.parse_args()
+
+    main(args.source_file, args.target_instrs_file, args.target_data_file)
 
 
 if __name__ == "__main__":

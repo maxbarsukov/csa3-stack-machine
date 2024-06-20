@@ -1,10 +1,11 @@
-from src.translator import translate
+import logging
+import sys
+
+from src.translator.main import main as translate
+from src.machine.main import main as machine
 
 
 def start() -> None:
-    with open("./examples/hello_world.asm", encoding="utf-8") as f:
-        source = f.read()
-
-    instr, data = translate(source)
-    print(instr)
-    print(data)
+    logging.getLogger().setLevel(logging.DEBUG)
+    translate(sys.argv[1], "./dbg/i.txt", "./dbg/d.txt")
+    machine("./dbg/i.txt", "./dbg/d.txt", "./dbg/input.txt", [1,2])
