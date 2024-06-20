@@ -66,6 +66,8 @@ class ControlUnit:
             opcode == Opcode.JMP
             or (opcode == Opcode.JZ and self.data_path.zero_flag)
             or (opcode == Opcode.JNZ and not self.data_path.zero_flag)
+            or (opcode == Opcode.JS and self.data_path.negative_flag)
+            or (opcode == Opcode.JNS and not self.data_path.negative_flag)
         ):
             sel_next = False
         elif opcode == Opcode.CALL:
@@ -79,6 +81,8 @@ class ControlUnit:
             Opcode.JMP,
             Opcode.JNZ,
             Opcode.JZ,
+            Opcode.JNS,
+            Opcode.JS,
             Opcode.CALL,
             Opcode.RET,
         }:
@@ -99,11 +103,15 @@ class ControlUnit:
         self.tick()
 
     def __repr__(self):
+        if self.data_path.data_addr < len(self.data_path.memory.memory.values):
+            mem_out = self.data_path.memory.memory.values[self.data_path.data_addr].value
+        else:
+            mem_out = 0
         state_repr = "TICK: {:3},  PC: {:3},  AR: {:3},  MEM_OUT: {:3},  TOS: {:22},".format(
             self.current_tick(),
             self.pc,
             self.data_path.data_addr,
-            self.data_path.memory.memory.values[self.data_path.data_addr].value,
+            mem_out,
             str(self.data_path.stack),
         )
 

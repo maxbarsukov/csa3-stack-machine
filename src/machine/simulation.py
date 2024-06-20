@@ -19,6 +19,7 @@ def simulation(
     stack_capacity: int,
     call_stack_capacity: int,
     instruction_limit: int,
+    output_from_ports: list[int],
 ) -> tuple[str, int, int]:
     io_controller = IOController()
     for port, create_io in get_ios():
@@ -47,7 +48,8 @@ def simulation(
 
     logging.debug("memory: %s", data_path.memory.memory)
 
-    output_buffer = data_path.io_controller.get_io(1).get_received_data()
-    logging.info("output_buffer: %s", repr("".join(output_buffer)))
+    for port in output_from_ports:
+        output_buffer = data_path.io_controller.get_io(port).get_received_data()
+        logging.info("output_buffer (port %s): %s", str(port), repr("".join(output_buffer)))
 
     return "".join(output_buffer), instr_counter, control_unit.current_tick()

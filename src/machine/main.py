@@ -8,7 +8,7 @@ from src.isa import read_data, read_instructions
 from src.machine.simulation import simulation
 
 
-def main(instructions_file: str, data_file: str, input_file: str) -> None:
+def main(instructions_file: str, data_file: str, input_file: str, output_from_ports: list[int]) -> None:
     instructions = read_instructions(instructions_file)
     data = read_data(data_file)
 
@@ -22,6 +22,7 @@ def main(instructions_file: str, data_file: str, input_file: str) -> None:
         STACK_CAPACITY,
         CALL_STACK_CAPACITY,
         INSTRUCTION_LIMIT,
+        output_from_ports,
     )
 
     print("".join(output))
@@ -32,7 +33,7 @@ def start() -> None:
     logging.getLogger().setLevel(logging.DEBUG)
     assert len(sys.argv) == 4, "Wrong arguments: machine.py <data_file> <code_file> <input_file>"
     _, instructions_file, data_file, input_file = sys.argv
-    main(instructions_file, data_file, input_file)
+    main(instructions_file, data_file, input_file, [1, 2])
 
 
 if __name__ == "__main__":

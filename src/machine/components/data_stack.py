@@ -31,6 +31,14 @@ class DataStack:
         assert self._top >= 2, "data stack underflow"
         return self.stack[self._top - 2]
 
+    def over(self) -> None:
+        assert self._top >= 2, "data stack underflow"
+        self.push(self.stack[self._top - 2])
+
+    def over3(self) -> None:
+        assert self._top >= 3, "data stack underflow"
+        self.push(self.stack[self._top - 3])
+
     def dup(self):
         self.push(self.top())
 

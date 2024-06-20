@@ -60,6 +60,7 @@ class IO0(IO):
 
 # OUTPUT 1
 class IO1(IO):
+    """Выводит переданное слово как символ."""
     def __init__(self, _data_in: list):
         self.data_out = []
 
@@ -72,6 +73,20 @@ class IO1(IO):
     def get_received_data(self) -> list:
         return self.data_out
 
+# OUTPUT 2
+class IO2(IO):
+    """Выводит переданное слово как число."""
+    def __init__(self, _data_in: list):
+        self.data_out = []
+
+    def signal_in(self) -> int:
+        raise NotImplementedError()
+
+    def signal_out(self, data: int):
+        self.data_out.append(str(data))
+
+    def get_received_data(self) -> list:
+        return self.data_out
 
 # INPUT 8
 class IO8(IO):
@@ -94,5 +109,6 @@ def get_ios() -> list[tuple[int, Callable[[list[str]], int]]]:
     return {
         (0, lambda inp: IO0(inp)),
         (1, lambda _inp: IO1(None)),
+        (2, lambda _inp: IO2(None)),
         (8, lambda _inp: IO8(None)),
     }
