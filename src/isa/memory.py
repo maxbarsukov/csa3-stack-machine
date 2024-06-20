@@ -13,7 +13,7 @@ class Memory(Generic[CellType]):
     def __init__(self, values: list[CellType], from_creator: bool = False) -> None:
         assert from_creator, "You should create XXMemory only from `create_XX_memory` method."
 
-        assert 1 <= len(values) <= MEMORY_SIZE, f"Out of memory for {type(values[0]).__name__}"
+        assert 1 <= len(values) < MEMORY_SIZE, f"Out of memory for {type(values[0]).__name__}"
 
         seen = set()
         unique_address_list = [seen.add(obj.address) or obj for obj in values if obj.address not in seen]

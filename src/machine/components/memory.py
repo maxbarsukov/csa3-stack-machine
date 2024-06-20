@@ -16,7 +16,7 @@ class Memory:
         assert 0 <= addr <= self.memory_size, f"Reading from not existing address: {addr}"
 
         if addr < len(self.memory.values):
-            return self.memory.values[addr]
+            return self.memory.values[addr].value
 
         return 0
 

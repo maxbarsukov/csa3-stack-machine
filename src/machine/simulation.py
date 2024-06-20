@@ -5,11 +5,11 @@ import logging
 from src.constants import MEMORY_SIZE
 from src.isa import DataMemory, InstructionMemory
 from src.machine.components.call_stack import CallStack
+from src.machine.components.control_unit import ControlUnit
+from src.machine.components.data_path import DataPath
 from src.machine.components.data_stack import DataStack
 from src.machine.components.io import IO0, IO1, IOController
 from src.machine.components.memory import Memory
-from src.machine.control_unit import ControlUnit
-from src.machine.data_path import DataPath
 
 
 def simulation(

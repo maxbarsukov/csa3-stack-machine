@@ -51,11 +51,17 @@ class IO0(IO):
 
         return ord(self.data_in.pop(0))
 
+    def signal_out(self, _data: int):
+        raise NotImplementedError()
+
 
 # OUTPUT 1
 class IO1(IO):
     def __init__(self, _data_in: list):
         self.data_out = []
+
+    def signal_in(self) -> int:
+        raise NotImplementedError()
 
     def signal_out(self, data: int):
         self.data_out.append(chr(data))
